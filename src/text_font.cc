@@ -1,6 +1,7 @@
 #include "text_font.h"
 
 #include <stdio.h>
+#include "korean_font.h"
 #include <string.h>
 
 #include "color.h"
@@ -144,6 +145,9 @@ void textFontsExit()
             internal_free(textFontDescriptor->glyphs);
             internal_free(textFontDescriptor->data);
         }
+    }
+    if (compat_stricmp(settings.system.language.c_str(), "korean") == 0) {
+        koreanFontsExit();
     }
 }
 
@@ -304,6 +308,10 @@ void fontSetCurrent(int font)
         gCurrentFont = font;
 
         fontManager->setCurrentProc(font);
+
+        if (compat_stricmp(settings.system.language.c_str(), "korean") == 0) {
+            koreanFontSetCurrent(font);
+        }
     }
 }
 

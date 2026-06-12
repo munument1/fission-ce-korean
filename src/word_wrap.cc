@@ -34,10 +34,22 @@ int wordWrap(const char* string, int width, short* breakpoints, short* breakpoin
     const char* prevSpaceOrHyphen = nullptr;
     const char* pch = string;
     while (*pch != '\0') {
-        accum += gap + fontGetCharacterWidth(*pch & 0xFF);
+        unsigned char c1 = *pch;
+        int charLen = 1;
+        if (c1 >= 0x81 && c1 <= 0xFE && *(pch + 1) != '\0') {
+            charLen = 2;
+        }
+
+        int charWidth = 0;
+        if (charLen == 2) {
+            charWidth = fontGetCharacterWidth((c1 << 8) | ((unsigned char)*(pch + 1)));
+        } else {
+            charWidth = fontGetCharacterWidth(c1);
+        }
+
+        accum += gap + charWidth;
         if (accum <= width) {
-            // NOTE: quests.txt #807 uses extended ascii.
-            if (isspace(*pch & 0xFF) || *pch == '-') {
+            if (charLen == 1 && (isspace(c1) || c1 == '-')) {
                 prevSpaceOrHyphen = pch;
             }
         } else {
@@ -50,19 +62,21 @@ int wordWrap(const char* string, int width, short* breakpoints, short* breakpoin
                 breakpoints[*breakpointsLengthPtr] = prevSpaceOrHyphen - string + 1;
                 *breakpointsLengthPtr += 1;
 
-                pch = prevSpaceOrHyphen;
+                pch = prevSpaceOrHyphen + 1;
+                prevSpaceOrHyphen = nullptr;
+                accum = 0;
+                continue;
             } else {
                 // Character wrap.
                 breakpoints[*breakpointsLengthPtr] = pch - string;
                 *breakpointsLengthPtr += 1;
 
-                pch--;
+                accum = 0;
+                prevSpaceOrHyphen = nullptr;
+                continue;
             }
-
-            prevSpaceOrHyphen = nullptr;
-            accum = 0;
         }
-        pch++;
+        pch += charLen;
     }
 
     if (*breakpointsLengthPtr == WORD_WRAP_MAX_COUNT) {

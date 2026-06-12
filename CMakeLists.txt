@@ -226,6 +226,8 @@ target_sources(${EXECUTABLE_NAME} PUBLIC
     "src/svga.h"
     "src/text_font.cc"
     "src/text_font.h"
+    "src/korean_font.cc"
+    "src/korean_font.h"
     "src/text_object.cc"
     "src/text_object.h"
     "src/tile.cc"
