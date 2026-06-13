@@ -13,6 +13,16 @@ Fallout: F.I.S.S.I.O.N. is a next‑generation, cross‑platform reimplementatio
 
 ---
 
+## Korean Compatibility Fork
+
+This fork includes experimental Windows Korean compatibility work with configurable legacy codepage and TTF font rendering support.
+
+- Korean guide: [KOR_README.md](KOR_README.md)
+- Korean compatibility notes: [KOREAN_COMPATIBILITY.md](KOREAN_COMPATIBILITY.md)
+- Multilingual TTF/codepage notes: [MULTILINGUAL_TTF_SUPPORT.md](MULTILINGUAL_TTF_SUPPORT.md)
+
+---
+
 ## Key Features
 
 - **Authentic isometric, turn‑based experience** (SPECIAL, original Fallout gameplay)
