@@ -126,6 +126,11 @@ struct GlyphCacheKeyHash {
 static std::unordered_map<GlyphCacheKey, CachedGlyph, GlyphCacheKeyHash> gGlyphCache;
 
 static const CachedGlyph* getGlyph(const std::string& filename, float render_size, float width_scale, int codepoint) {
+    if (codepoint < 32 || codepoint == 127) {
+        static const CachedGlyph emptyGlyph = { 0, 0, 0, 0, 0, {} };
+        return &emptyGlyph;
+    }
+
     int size_key = (int)(render_size * 10.0f);
     int width_scale_key = (int)(width_scale * 100.0f);
     GlyphCacheKey key{ filename, size_key, width_scale_key, codepoint };
