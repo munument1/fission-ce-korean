@@ -128,6 +128,35 @@ struct EnhancementSettings {
     bool npc_armor = false;
 };
 
+struct FontSettings {
+    // -1 = auto, 0 = disabled, 1 = enabled.
+    int ttf_renderer = 0;
+    int legacy_codepage = 0;
+    std::string font_path = "fonts/english";
+    std::string fallback_font_path = "data/fonts/english";
+    std::string small_font = "";
+    std::string normal_font = "";
+    std::string large_font = "";
+    std::string bold_font = "";
+    std::string title_font = "";
+    std::string default_font = "";
+    int small_size = 16;
+    int normal_size = 10;
+    int large_size = 17;
+    int bold_size = 13;
+    int title_size = 22;
+    int default_size = 13;
+    int small_line_height = 16;
+    int normal_line_height = 10;
+    int large_line_height = 17;
+    int bold_line_height = 13;
+    int title_line_height = 22;
+    int default_line_height = 13;
+    double width_scale = 1.0;
+    int baseline_offset = 0;
+    bool antialiased = true;
+};
+
 struct ModSettings {
     std::string dude_native_look_jumpsuit_male = MOD_CONFIG_DEFAULT_DUDE_NATIVE_LOOK_JUMPSUIT_MALE;
     std::string dude_native_look_jumpsuit_female = MOD_CONFIG_DEFAULT_DUDE_NATIVE_LOOK_JUMPSUIT_FEMALE;
@@ -206,6 +235,7 @@ struct Settings {
     MapperSettings mapper;
     GraphicSettings graphics;
     EnhancementSettings enhancements;
+    FontSettings font;
     ModSettings mod_settings;
     ModScriptsSettings mod_scripts;
 };

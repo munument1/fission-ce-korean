@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "korean_font.h"
 #include "text_font.h"
 
 namespace fallout {
@@ -35,10 +36,7 @@ int wordWrap(const char* string, int width, short* breakpoints, short* breakpoin
     const char* pch = string;
     while (*pch != '\0') {
         unsigned char c1 = *pch;
-        int charLen = 1;
-        if (c1 >= 0x81 && c1 <= 0xFE && *(pch + 1) != '\0') {
-            charLen = 2;
-        }
+        int charLen = koreanFontGetByteCount(pch);
 
         int charWidth = 0;
         if (charLen == 2) {

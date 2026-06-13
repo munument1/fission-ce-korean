@@ -3,6 +3,8 @@
 
 namespace fallout {
 
+bool koreanFontsEnabled();
+int koreanFontGetByteCount(const char* string);
 void koreanFontSetCurrent(int font);
 void koreanFontsExit();
 

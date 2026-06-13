@@ -151,6 +151,32 @@ static void settingsFromConfig()
     settingsRead(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_MINIMAP, settings.enhancements.minimap);
     settingsRead(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_MULTI_COLUMN_INVENTORY, settings.enhancements.multi_column_inventory);
     settingsRead(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_NPC_ARMOR, settings.enhancements.npc_armor);
+
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TTF_RENDERER_KEY, settings.font.ttf_renderer);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LEGACY_CODEPAGE_KEY, settings.font.legacy_codepage);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FONT_PATH_KEY, settings.font.font_path);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FALLBACK_FONT_PATH_KEY, settings.font.fallback_font_path);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_FONT_KEY, settings.font.small_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_FONT_KEY, settings.font.normal_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_FONT_KEY, settings.font.large_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_FONT_KEY, settings.font.bold_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_FONT_KEY, settings.font.title_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_FONT_KEY, settings.font.default_font);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_SIZE_KEY, settings.font.small_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_SIZE_KEY, settings.font.normal_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_SIZE_KEY, settings.font.large_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_SIZE_KEY, settings.font.bold_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_SIZE_KEY, settings.font.title_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_SIZE_KEY, settings.font.default_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_LINE_HEIGHT_KEY, settings.font.small_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_LINE_HEIGHT_KEY, settings.font.normal_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_LINE_HEIGHT_KEY, settings.font.large_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_LINE_HEIGHT_KEY, settings.font.bold_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_LINE_HEIGHT_KEY, settings.font.title_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_LINE_HEIGHT_KEY, settings.font.default_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_WIDTH_SCALE_KEY, settings.font.width_scale);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BASELINE_OFFSET_KEY, settings.font.baseline_offset);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_ANTIALIASED_KEY, settings.font.antialiased);
 }
 
 // read in modConfig setting (no writing back, just reading)
@@ -341,6 +367,32 @@ static void settingsToConfig()
     settingsWrite(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_MINIMAP, settings.enhancements.minimap);
     settingsWrite(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_MULTI_COLUMN_INVENTORY, settings.enhancements.multi_column_inventory);
     settingsWrite(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_NPC_ARMOR, settings.enhancements.npc_armor);
+
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TTF_RENDERER_KEY, settings.font.ttf_renderer);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LEGACY_CODEPAGE_KEY, settings.font.legacy_codepage);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FONT_PATH_KEY, settings.font.font_path);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FALLBACK_FONT_PATH_KEY, settings.font.fallback_font_path);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_FONT_KEY, settings.font.small_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_FONT_KEY, settings.font.normal_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_FONT_KEY, settings.font.large_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_FONT_KEY, settings.font.bold_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_FONT_KEY, settings.font.title_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_FONT_KEY, settings.font.default_font);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_SIZE_KEY, settings.font.small_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_SIZE_KEY, settings.font.normal_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_SIZE_KEY, settings.font.large_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_SIZE_KEY, settings.font.bold_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_SIZE_KEY, settings.font.title_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_SIZE_KEY, settings.font.default_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_SMALL_LINE_HEIGHT_KEY, settings.font.small_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_NORMAL_LINE_HEIGHT_KEY, settings.font.normal_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LARGE_LINE_HEIGHT_KEY, settings.font.large_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BOLD_LINE_HEIGHT_KEY, settings.font.bold_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TITLE_LINE_HEIGHT_KEY, settings.font.title_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_DEFAULT_LINE_HEIGHT_KEY, settings.font.default_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_WIDTH_SCALE_KEY, settings.font.width_scale);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BASELINE_OFFSET_KEY, settings.font.baseline_offset);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_ANTIALIASED_KEY, settings.font.antialiased);
 
     // Mod Settings
     /*settingsWrite(MOD_CONFIG_SETTINGS_KEY, MOD_CONFIG_DUDE_NATIVE_LOOK_JUMPSUIT_MALE_KEY, settings.mod_settings.dude_native_look_jumpsuit_male);

@@ -10,13 +10,14 @@
 
 #include "color.h"
 #include "db.h"
+#include "platform_compat.h"
 #include "settings.h"
 #include "text_font.h"
 
 namespace fallout {
 
 struct FontConfig {
-    const char* filename;
+    std::string filename;
     float render_size;      // Vertical size for scaling
     float width_scale;      // Horizontal scale multiplier (e.g. 0.65f for compression)
     int line_height;        // Height returned to the layout engine
@@ -24,37 +25,55 @@ struct FontConfig {
     bool antialiased;
 };
 
+static FontConfig makeFontConfig(const std::string& filename, int renderSize, int lineHeight)
+{
+    return {
+        filename,
+        (float)renderSize,
+        (float)settings.font.width_scale,
+        lineHeight,
+        settings.font.baseline_offset,
+        settings.font.antialiased
+    };
+}
+
+static std::string fallbackFontName()
+{
+    if (!settings.font.default_font.empty()) {
+        return settings.font.default_font;
+    }
+
+    return settings.font.normal_font;
+}
+
+static std::string fontNameOrFallback(const std::string& filename)
+{
+    return filename.empty() ? fallbackFontName() : filename;
+}
+
 static FontConfig getKoreanFontConfig(int font) {
     switch (font) {
-        // Small fonts (NanumSquareNeo-aLt)
         case 0:
         case 100:
-            return { "NanumSquareNeo-aLt.ttf", 16.0f, 1.0f, 16, 0, true };
+            return makeFontConfig(fontNameOrFallback(settings.font.small_font), settings.font.small_size, settings.font.small_line_height);
 
-        // Normal/dialogue/interface (NanumSquareNeo-aLt)
         case 1:
         case 101:
-            return { "NanumSquareNeo-aLt.ttf", 10.0f, 1.0f, 10, 0, true };
+            return makeFontConfig(fontNameOrFallback(settings.font.normal_font), settings.font.normal_size, settings.font.normal_line_height);
 
-        // Large fonts (ChungjuKimSaeng)
         case 2:
         case 102:
-            return { "ChungjuKimSaeng.ttf", 17.0f, 1.0f, 17, 0, true };
+            return makeFontConfig(fontNameOrFallback(settings.font.large_font), settings.font.large_size, settings.font.large_line_height);
 
-        // Bold/medium fonts (ChungjuKimSaeng)
         case 3:
         case 103:
-            return { "ChungjuKimSaeng.ttf", 13.0f, 1.0f, 13, 0, true };
+            return makeFontConfig(fontNameOrFallback(settings.font.bold_font), settings.font.bold_size, settings.font.bold_line_height);
 
-        // Title/Header fonts (ChungjuKimSaeng)
         case 104:
-            return { "ChungjuKimSaeng.ttf", 22.0f, 1.0f, 22, 0, true };
+            return makeFontConfig(fontNameOrFallback(settings.font.title_font), settings.font.title_size, settings.font.title_line_height);
 
         default:
-            if (font >= 100) {
-                return { "ChungjuKimSaeng.ttf", 13.0f, 1.0f, 13, 0, true };
-            }
-            return { "NanumSquareNeo-aLt.ttf", 10.0f, 1.0f, 10, 0, true };
+            return makeFontConfig(fallbackFontName(), settings.font.default_size, settings.font.default_line_height);
     }
 }
 
@@ -66,15 +85,19 @@ struct LoadedFont {
 static std::unordered_map<std::string, std::unique_ptr<LoadedFont>> gLoadedFonts;
 
 static stbtt_fontinfo* getFontInfo(const std::string& filename) {
+    if (filename.empty()) {
+        return nullptr;
+    }
+
     auto it = gLoadedFonts.find(filename);
     if (it != gLoadedFonts.end()) {
         return &it->second->info;
     }
 
-    std::string path = "fonts/korean/" + filename;
+    std::string path = settings.font.font_path + "/" + filename;
     File* f = fileOpen(path.c_str(), "rb");
     if (!f) {
-        path = "data/fonts/korean/" + filename;
+        path = settings.font.fallback_font_path + "/" + filename;
         f = fileOpen(path.c_str(), "rb");
     }
     if (!f) return nullptr;
@@ -206,7 +229,12 @@ static const CachedGlyph* getGlyph(const std::string& filename, float render_siz
     return &gGlyphCache[key];
 }
 
-static std::vector<int> decodeEucKr(const char* str) {
+static int legacyCodepage()
+{
+    return settings.font.legacy_codepage >= 0 ? settings.font.legacy_codepage : 0;
+}
+
+static std::vector<int> decodeLegacyText(const char* str) {
     std::vector<int> codepoints;
     if (!str) return codepoints;
 
@@ -219,7 +247,7 @@ static std::vector<int> decodeEucKr(const char* str) {
         } else if (c >= 0x81 && c <= 0xFE && *(p + 1)) {
             char src[2] = { (char)c, (char)*(p + 1) };
             wchar_t dst[1] = { 0 };
-            if (MultiByteToWideChar(949, 0, src, 2, dst, 1) > 0) {
+            if (MultiByteToWideChar(legacyCodepage(), 0, src, 2, dst, 1) > 0) {
                 codepoints.push_back(dst[0]);
             } else {
                 codepoints.push_back((c << 8) | *(p + 1));
@@ -233,13 +261,13 @@ static std::vector<int> decodeEucKr(const char* str) {
     return codepoints;
 }
 
-static int cp949ToUnicodeChar(int ch) {
+static int legacyToUnicodeChar(int ch) {
     if (ch == 0x95) return 0x2022;
     if (ch < 128) return ch;
     if (ch > 255) {
         char src[2] = { (char)(ch >> 8), (char)(ch & 0xFF) };
         wchar_t dst[1] = { 0 };
-        if (MultiByteToWideChar(949, 0, src, 2, dst, 1) > 0) {
+        if (MultiByteToWideChar(legacyCodepage(), 0, src, 2, dst, 1) > 0) {
             return dst[0];
         }
     }
@@ -266,7 +294,7 @@ static void koreanFontDrawText(unsigned char* buf, const char* string, int lengt
         blendTable = _getColorBlendTable(color & 0xFF);
     }
 
-    std::vector<int> codepoints = decodeEucKr(string);
+    std::vector<int> codepoints = decodeLegacyText(string);
     unsigned char* ptr = buf;
     int current_width = 0;
 
@@ -341,7 +369,7 @@ static int koreanFontGetLineHeight() {
 
 static int koreanFontGetStringWidth(const char* string) {
     FontConfig cfg = getKoreanFontConfig(gCurrentFont);
-    std::vector<int> codepoints = decodeEucKr(string);
+    std::vector<int> codepoints = decodeLegacyText(string);
     int width = 0;
     for (int cp : codepoints) {
         const auto* cg = getGlyph(cfg.filename, cfg.render_size, cfg.width_scale, cp);
@@ -354,7 +382,7 @@ static int koreanFontGetStringWidth(const char* string) {
 
 static int koreanFontGetCharacterWidth(int ch) {
     FontConfig cfg = getKoreanFontConfig(gCurrentFont);
-    int unicode_cp = cp949ToUnicodeChar(ch);
+    int unicode_cp = legacyToUnicodeChar(ch);
     const auto* cg = getGlyph(cfg.filename, cfg.render_size, cfg.width_scale, unicode_cp);
     if (cg) {
         return cg->advance;
@@ -372,7 +400,7 @@ static int koreanFontGetMonospacedCharacterWidth() {
 }
 
 static int koreanFontGetMonospacedStringWidth(const char* string) {
-    std::vector<int> codepoints = decodeEucKr(string);
+    std::vector<int> codepoints = decodeLegacyText(string);
     return koreanFontGetMonospacedCharacterWidth() * codepoints.size();
 }
 
@@ -393,6 +421,31 @@ void koreanFontSetCurrent(int font) {
     fontGetLetterSpacing = koreanFontGetLetterSpacing;
     fontGetBufferSize = koreanFontGetBufferSize;
     fontGetMonospacedCharacterWidth = koreanFontGetMonospacedCharacterWidth;
+}
+
+bool koreanFontsEnabled() {
+    if (fallbackFontName().empty()) {
+        return false;
+    }
+
+    if (settings.font.ttf_renderer == 0) {
+        return false;
+    }
+
+    if (settings.font.ttf_renderer > 0) {
+        return true;
+    }
+
+    return compat_stricmp(settings.system.language.c_str(), "korean") == 0;
+}
+
+int koreanFontGetByteCount(const char* string) {
+    if (!koreanFontsEnabled() || string == nullptr || *string == '\0') {
+        return 1;
+    }
+
+    unsigned char c = (unsigned char)*string;
+    return c >= 0x81 && c <= 0xFE && *(string + 1) != '\0' ? 2 : 1;
 }
 
 void koreanFontsExit() {

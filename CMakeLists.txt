@@ -330,6 +330,12 @@ if(WIN32)
         "os/windows/fission.ico"
         "os/windows/fission.rc"
     )
+
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set_target_properties(${EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "fallout-fission-x64")
+    else()
+        set_target_properties(${EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "fallout-fission-x86")
+    endif()
 endif()
 
 if(APPLE)

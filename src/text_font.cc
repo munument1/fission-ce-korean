@@ -146,7 +146,7 @@ void textFontsExit()
             internal_free(textFontDescriptor->data);
         }
     }
-    if (compat_stricmp(settings.system.language.c_str(), "korean") == 0) {
+    if (koreanFontsEnabled()) {
         koreanFontsExit();
     }
 }
@@ -309,7 +309,7 @@ void fontSetCurrent(int font)
 
         fontManager->setCurrentProc(font);
 
-        if (compat_stricmp(settings.system.language.c_str(), "korean") == 0) {
+        if (koreanFontsEnabled()) {
             koreanFontSetCurrent(font);
         }
     }
