@@ -26,35 +26,35 @@ struct FontConfig {
 
 static FontConfig getKoreanFontConfig(int font) {
     switch (font) {
-        // Small fonts (D2Coding)
+        // Small fonts (NanumSquareNeo-aLt)
         case 0:
         case 100:
-            return { "D2Coding.ttf", 16.0f, 1.0f, 16, 0, true };
+            return { "NanumSquareNeo-aLt.ttf", 16.0f, 1.0f, 16, 0, true };
 
-        // Normal/dialogue/interface (D2Coding)
+        // Normal/dialogue/interface (NanumSquareNeo-aLt)
         case 1:
         case 101:
-            return { "D2Coding.ttf", 10.0f, 1.0f, 10, 0, true };
+            return { "NanumSquareNeo-aLt.ttf", 10.0f, 1.0f, 10, 0, true };
 
-        // Large fonts (AtoZ8ExtraBold)
+        // Large fonts (ChungjuKimSaeng)
         case 2:
         case 102:
-            return { "AtoZ8ExtraBold.ttf", 17.0f, 1.0f, 17, 0, true };
+            return { "ChungjuKimSaeng.ttf", 17.0f, 1.0f, 17, 0, true };
 
-        // Bold/medium fonts (AtoZ8ExtraBold)
+        // Bold/medium fonts (ChungjuKimSaeng)
         case 3:
         case 103:
-            return { "AtoZ8ExtraBold.ttf", 13.0f, 1.0f, 13, 0, true };
+            return { "ChungjuKimSaeng.ttf", 13.0f, 1.0f, 13, 0, true };
 
-        // Title/Header fonts (AtoZ8ExtraBold)
+        // Title/Header fonts (ChungjuKimSaeng)
         case 104:
-            return { "AtoZ8ExtraBold.ttf", 22.0f, 1.0f, 22, 0, true };
+            return { "ChungjuKimSaeng.ttf", 22.0f, 1.0f, 22, 0, true };
 
         default:
             if (font >= 100) {
-                return { "AtoZ8ExtraBold.ttf", 13.0f, 1.0f, 13, 0, true };
+                return { "ChungjuKimSaeng.ttf", 13.0f, 1.0f, 13, 0, true };
             }
-            return { "D2Coding.ttf", 10.0f, 1.0f, 10, 0, true };
+            return { "NanumSquareNeo-aLt.ttf", 10.0f, 1.0f, 10, 0, true };
     }
 }
 
