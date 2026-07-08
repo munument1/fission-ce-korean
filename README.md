@@ -5,7 +5,7 @@
 # Fallout: F.I.S.S.I.O.N.
 *Flexible Isometric Simulation System for Interactive Open‑world Nuclear‑roleplaying*
 
-Fallout: F.I.S.S.I.O.N. is a next‑generation, cross‑platform reimplementation of Fallout 1 & 2, forked from [Fallout2-CE](https://github.com/alexbatalov/fallout2-ce) that preserves the original isometric, turn‑based gameplay while adding modding enhancements, widescreen support, and true community‑driven extensibility. Run it on Windows, Linux, macOS, Android, iOS—and even in browsers.
+Fallout: F.I.S.S.I.O.N. is a next‑generation, cross‑platform reimplementation of Fallout 2, forked from [Fallout2-CE](https://github.com/alexbatalov/fallout2-ce) that preserves the original isometric, turn‑based gameplay while adding modding enhancements, widescreen support, and true community‑driven extensibility. Run it on Windows, Linux, macOS, Android, iOS—and even in browsers.
 
 > **Powered by the F.I.S.S.I.O.N. Engine**
 > *Flexible. Isometric. Simulation. System. Interactive. Open‑world. Nuclear‑roleplay.*
@@ -31,6 +31,25 @@ This fork includes experimental Windows Korean compatibility work with configura
 - **Modular, customizable systems**—community mods plug in seamlessly (working now)
 - **100% compatible** with original Fallout 1 & 2 assets  (can't run Fallout 1 yet... one day)
 - **Future‑proof**: easily extended for new content and Fallout 2 integration (working now)
+
+---
+
+## Screenshots
+
+<p align="center">
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot2.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot2_thumb.png" width="240" alt="Screenshot 1"></a>
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot1.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot1_thumb.png" width="240" alt="Screenshot 2"></a>
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot3.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot3_thumb.png" width="240" alt="Screenshot 3"></a>
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot9.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot9_thumb.png" width="240" alt="Screenshot 9"></a>
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot4.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot4_thumb.png" width="240" alt="Screenshot 4"></a>
+    <a href="https://cambragol.github.io/fallout-fission/assets/screenshot5.png">
+    <img src="https://cambragol.github.io/fallout-fission/assets/screenshot5_thumb.png" width="240" alt="Screenshot 5"></a>
+</p>
 
 ---
 
@@ -174,6 +193,7 @@ For a vanilla Fallout2.exe experiecne (at widescreen) set StrictVanilla=1
 ## Contributing
 
 Contributions are welcome! Please open issues or pull requests on GitHub.
+For localization contributions, see the readme here: [Localization](https://github.com/cambragol/fission-ce/tree/main/files/localization)
 
 ---
 

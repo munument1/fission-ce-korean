@@ -38,11 +38,11 @@ enum {
 
 typedef enum OutlineType {
     OUTLINE_TYPE_HOSTILE = 1,
-    OUTLINE_TYPE_2 = 2,
-    OUTLINE_TYPE_4 = 4,
+    OUTLINE_TYPE_2 = 2, // red
+    OUTLINE_TYPE_GREY = 4,
     OUTLINE_TYPE_FRIENDLY = 8,
     OUTLINE_TYPE_ITEM = 16,
-    OUTLINE_TYPE_32 = 32,
+    OUTLINE_TYPE_32 = 32, // dark yellow
 } OutlineType;
 
 typedef enum ObjectFlags {
@@ -58,6 +58,7 @@ typedef enum ObjectFlags {
     //  - To prevent saving of objects which cannot be removed for some reason,
     // like objects trying to delete themselves from scripting engine (used
     // together with `OBJECT_HIDDEN` to prevent affecting game world).
+    OBJECT_OPENED = 0x02, // new flag for containers and corpses
     OBJECT_NO_SAVE = 0x04,
     OBJECT_FLAT = 0x08,
     OBJECT_NO_BLOCK = 0x10,
@@ -280,15 +281,15 @@ typedef struct Object {
     int fid; // obj_fid
     int flags; // obj_flags
     int elevation; // obj_elev
-    ObjectData data;
     int pid; // obj_pid
     int cid; // obj_cid
     int lightDistance; // obj_light_distance
     int lightIntensity; // obj_light_intensity
     int outline; // obj_outline
     int sid; // obj_sid
-    Object* owner;
     int scriptIndex;
+    Object* owner;
+    ObjectData data;
 } Object;
 
 typedef struct ObjectListNode {
