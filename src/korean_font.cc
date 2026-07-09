@@ -6,7 +6,11 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#if defined(_WIN32)
 #include <windows.h>
+#else
+#include <SDL_stdinc.h>
+#endif
 
 #include "color.h"
 #include "db.h"
@@ -234,6 +238,66 @@ static int legacyCodepage()
     return settings.font.legacy_codepage >= 0 ? settings.font.legacy_codepage : 0;
 }
 
+static const char* legacyCodepageName()
+{
+    switch (legacyCodepage()) {
+    case 932:
+        return "CP932";
+    case 936:
+        return "CP936";
+    case 949:
+        return "CP949";
+    case 950:
+        return "CP950";
+    case 1250:
+        return "CP1250";
+    case 1251:
+        return "CP1251";
+    case 1252:
+        return "CP1252";
+    case 1253:
+        return "CP1253";
+    case 1254:
+        return "CP1254";
+    case 1255:
+        return "CP1255";
+    case 1256:
+        return "CP1256";
+    case 1257:
+        return "CP1257";
+    case 1258:
+        return "CP1258";
+    default:
+        return "CP949";
+    }
+}
+
+static int legacyBytesToUnicode(const char* bytes, size_t length)
+{
+#if defined(_WIN32)
+    wchar_t dst[1] = { 0 };
+    if (MultiByteToWideChar(legacyCodepage(), 0, bytes, static_cast<int>(length), dst, 1) > 0) {
+        return dst[0];
+    }
+#else
+    char* converted = SDL_iconv_string("UTF-32LE", legacyCodepageName(), bytes, length);
+    if (converted != nullptr) {
+        const unsigned char* raw = reinterpret_cast<const unsigned char*>(converted);
+        int codepoint = raw[0] | (raw[1] << 8) | (raw[2] << 16) | (raw[3] << 24);
+        SDL_free(converted);
+        if (codepoint > 0) {
+            return codepoint;
+        }
+    }
+#endif
+
+    if (length == 2) {
+        return (static_cast<unsigned char>(bytes[0]) << 8) | static_cast<unsigned char>(bytes[1]);
+    }
+
+    return static_cast<unsigned char>(bytes[0]);
+}
+
 static std::vector<int> decodeLegacyText(const char* str) {
     std::vector<int> codepoints;
     if (!str) return codepoints;
@@ -246,12 +310,7 @@ static std::vector<int> decodeLegacyText(const char* str) {
             p++;
         } else if (c >= 0x81 && c <= 0xFE && *(p + 1)) {
             char src[2] = { (char)c, (char)*(p + 1) };
-            wchar_t dst[1] = { 0 };
-            if (MultiByteToWideChar(legacyCodepage(), 0, src, 2, dst, 1) > 0) {
-                codepoints.push_back(dst[0]);
-            } else {
-                codepoints.push_back((c << 8) | *(p + 1));
-            }
+            codepoints.push_back(legacyBytesToUnicode(src, 2));
             p += 2;
         } else {
             codepoints.push_back(c);
@@ -266,10 +325,7 @@ static int legacyToUnicodeChar(int ch) {
     if (ch < 128) return ch;
     if (ch > 255) {
         char src[2] = { (char)(ch >> 8), (char)(ch & 0xFF) };
-        wchar_t dst[1] = { 0 };
-        if (MultiByteToWideChar(legacyCodepage(), 0, src, 2, dst, 1) > 0) {
-            return dst[0];
-        }
+        return legacyBytesToUnicode(src, 2);
     }
     return ch;
 }
