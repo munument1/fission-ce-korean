@@ -176,10 +176,23 @@ Fallout 2/
 
 ```ini
 [enhancements]
-WorldMapTravelMarkers=1
-GaplessMusic=1
-EnhancedBarter=1
-Minimap=1
+AutoOpenDoors=0
+AutoPush=1
+AutoQuickSave=0
+DisplayBonusDamage=0
+DisplayKarmaChanges=0
+EnhancedBarter=0
+ExplosionsEmitLight=0
+GameSpeed=1
+GaplessMusic=0
+InventoryColumns=1
+MassHighlight=1
+Minimap=0
+NpcArmor=1
+NumbersInDialogue=0
+RemoveCriticalTimelimits=0
+SkipOpeningMovies=2
+StrictVanilla=0
 ```
 
 와이드스크린만 적용하고 원본 `Fallout2.exe`와 최대한 같은 바닐라 경험을 원한다면 `StrictVanilla=1`로 설정하세요.
