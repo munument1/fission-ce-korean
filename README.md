@@ -3,38 +3,38 @@
 </p>
 
 # Fallout: F.I.S.S.I.O.N.
-*Flexible Isometric Simulation System for Interactive Open‑world Nuclear‑roleplaying*
+*Flexible Isometric Simulation System for Interactive Open-World Nuclear Roleplaying*
 
-Fallout: F.I.S.S.I.O.N. is a next‑generation, cross‑platform reimplementation of Fallout 2, forked from [Fallout2-CE](https://github.com/alexbatalov/fallout2-ce) that preserves the original isometric, turn‑based gameplay while adding modding enhancements, widescreen support, and true community‑driven extensibility. Run it on Windows, Linux, macOS, Android, iOS—and even in browsers.
+Fallout: F.I.S.S.I.O.N.은 [Fallout2-CE](https://github.com/alexbatalov/fallout2-ce)에서 갈라져 나온 Fallout 2 재구현 프로젝트입니다. 원작의 아이소메트릭 턴제 게임플레이를 보존하면서 모딩 확장, 와이드스크린 지원, 커뮤니티 중심의 확장성을 더했습니다. Windows, Linux, macOS, Android, iOS, 브라우저에서 실행할 수 있습니다.
 
-> **Powered by the F.I.S.S.I.O.N. Engine**
-> *Flexible. Isometric. Simulation. System. Interactive. Open‑world. Nuclear‑roleplay.*
-> **Split from the past, Powering the future**
-
----
-
-## Korean Compatibility Fork
-
-This fork includes experimental Windows Korean compatibility work with configurable legacy codepage and TTF font rendering support.
-
-- 한국어 버전 가이드 파일 Korean guide: [KOR_README.md](KOR_README.md)
-- Korean compatibility notes: [KOREAN_COMPATIBILITY.md](KOREAN_COMPATIBILITY.md)
-- Multilingual TTF/codepage notes: [MULTILINGUAL_TTF_SUPPORT.md](MULTILINGUAL_TTF_SUPPORT.md)
+> **F.I.S.S.I.O.N. 엔진으로 구동**
+> *Flexible. Isometric. Simulation. System. Interactive. Open-World. Nuclear Roleplay.*
+> **과거에서 분리되어, 미래를 움직입니다**
 
 ---
 
-## Key Features
+## 한국어 호환성 포크
 
-- **Authentic isometric, turn‑based experience** (SPECIAL, original Fallout gameplay)
-- **True cross‑platform support**: Windows, macOS, Linux, iOS, Android, Web
-- **Widescreen & high‑res scaling** with pixel‑perfect aspect preservation
-- **Modular, customizable systems**—community mods plug in seamlessly (working now)
-- **100% compatible** with original Fallout 1 & 2 assets  (can't run Fallout 1 yet... one day)
-- **Future‑proof**: easily extended for new content and Fallout 2 integration (working now)
+이 포크에는 Windows 환경에서 한국어를 사용하기 위한 실험적인 호환성 작업이 포함되어 있습니다. 레거시 코드페이지 설정과 TTF 폰트 렌더링 지원을 구성할 수 있습니다.
+
+- 한국어 버전 가이드: [KOR_README.md](KOR_README.md)
+- 한국어 호환성 참고 사항: [KOREAN_COMPATIBILITY.md](KOREAN_COMPATIBILITY.md)
+- 다국어 TTF/코드페이지 참고 사항: [MULTILINGUAL_TTF_SUPPORT.md](MULTILINGUAL_TTF_SUPPORT.md)
 
 ---
 
-## Screenshots
+## 주요 기능
+
+- **원작에 충실한 아이소메트릭 턴제 경험**: SPECIAL 시스템과 클래식 Fallout 게임플레이 유지
+- **진정한 크로스 플랫폼 지원**: Windows, macOS, Linux, iOS, Android, Web
+- **와이드스크린 및 고해상도 스케일링**: 픽셀 단위의 화면비 보존
+- **모듈식 커스터마이징 시스템**: 커뮤니티 모드를 자연스럽게 연동
+- **원본 Fallout 1 & 2 애셋과 100% 호환**: 아직 Fallout 1은 실행할 수 없습니다
+- **미래 확장성**: 새 콘텐츠와 Fallout 2 통합을 쉽게 확장할 수 있는 구조
+
+---
+
+## 스크린샷
 
 <p align="center">
     <a href="https://cambragol.github.io/fallout-fission/assets/screenshot2.png">
@@ -53,156 +53,152 @@ This fork includes experimental Windows Korean compatibility work with configura
 
 ---
 
-## F.I.S.S.I.O.N. Breakdown
+## F.I.S.S.I.O.N. 이름 풀이
 
-```
-╔═══════════════════════╦════════════════════════════════════════════╗
-║      ATTRIBUTE        ║               DESCRIPTION                  ║
-╠═══════════════════════╬════════════════════════════════════════════╣
-║ F – Flexible          ║ Adaptable, moddable, and future‑ready      ║
-║ I – Isometric         ║ Faithful to classic 2D grid perspective    ║
-║ S – Simulation        ║ Manages AI, world rules, stats, turn timing║
-║ S – System            ║ Unified architecture for engine/runtime    ║
-║ I – Interactive       ║ Dynamic player choices and feedback        ║
-║ O – Open‑world        ║ Seamless large‑map exploration             ║
-║ N – Nuclear‑roleplay  ║ Immersive post‑nuclear RPG experience      ║
-╚═══════════════════════╩════════════════════════════════════════════╝
-```
+| 글자 | 의미 | 설명 |
+| --- | --- | --- |
+| F | Flexible | 적응 가능하고, 모딩하기 쉬우며, 미래 확장에 대비한 구조 |
+| I | Isometric | 클래식 2D 격자 시점에 충실한 화면 구성 |
+| S | Simulation | AI, 세계 규칙, 능력치, 턴 진행을 관리 |
+| S | System | 엔진과 런타임을 아우르는 통합 아키텍처 |
+| I | Interactive | 플레이어 선택과 반응을 동적으로 처리 |
+| O | Open-World | 넓은 맵을 끊김 없이 탐험 |
+| N | Nuclear Roleplay | 몰입감 있는 포스트 뉴클리어 RPG 경험 |
 
 ---
 
-## Mod/Game Compatibility
+## 모드/게임 호환성
 
-**Fully supported**:
+**완전히 지원됨**:
 - Fallout 2
 - Fallout: Nevada
 - Fallout: Sonora
 
-**Not supported yet, maybe never**:
+**아직 지원되지 않으며, 앞으로도 지원되지 않을 수 있음**:
 - Fallout 1
-- Fallout Nevada or Sonora 'repacks'
+- Fallout Nevada 또는 Sonora 리팩 버전
 - Restoration Project
 - Fallout: Et Tu
 - Olympus 2207
-- Resurrection, Yesterday (untested)
+- Resurrection, Yesterday (미검증)
 
-(For full Fallout 1 support see [Fallout1-CE](https://github.com/alexbatalov/fallout1-ce).)
+Fallout 1 전체 지원이 필요하다면 [Fallout1-CE](https://github.com/alexbatalov/fallout1-ce)를 확인하세요.
 
 ---
 
-## Installation
+## 설치
 
-### Prerequisites
-You must own **Fallout 2** (GOG, Steam, or Epic Games version) and have it fully installed. F.I.S.S.I.O.N. is a drop-in replacement for `Fallout2.exe` and requires the complete game data.
+### 사전 준비
 
-**Supported base installations:**
-- **Vanilla Fallout 2** - The classic game
-- **Fallout: Nevada** - Russian total conversion mod
-- **Fallout: Sonora** - Russian total conversion mod
+**Fallout 2** 정품(GOG, Steam 또는 Epic Games 버전)을 보유하고 있어야 하며, 게임이 완전히 설치되어 있어야 합니다. F.I.S.S.I.O.N.은 `Fallout2.exe`를 대체하는 실행 파일이며, 완전한 게임 데이터가 필요합니다.
 
-### Quick Installation
-1. **Ensure you have a working vanilla Fallout 2 installation**
-2. **Download** the latest [F.I.S.S.I.O.N. release](https://github.com/cambragol/fission-ce/releases)
-3. **Extract** the F.I.S.S.I.O.N. files into your Fallout 2 folder
-4. **Run** `fallout-fission.exe` (Windows) or `fallout-fission.app` (macOS) instead of the original executable
+**지원되는 기본 설치 환경:**
+- **Vanilla Fallout 2** - 클래식 원본 게임
+- **Fallout: Nevada** - 러시아어 토탈 컨버전 모드
+- **Fallout: Sonora** - 러시아어 토탈 컨버전 모드
 
-That's it! F.I.S.S.I.O.N. automatically loads all existing content and adds its enhanced modding capabilities.
+### 빠른 설치
 
-### Platform-Specific Instructions
+1. **정상 작동하는 바닐라 Fallout 2 설치본이 있는지 확인합니다.**
+2. 최신 [F.I.S.S.I.O.N. 릴리스](https://github.com/cambragol/fission-ce/releases)를 **다운로드**합니다.
+3. F.I.S.S.I.O.N. 파일을 Fallout 2 폴더에 **압축 해제**합니다.
+4. 원본 실행 파일 대신 `fallout-fission.exe`(Windows) 또는 `fallout-fission.app`(macOS)를 **실행**합니다.
+
+이것으로 충분합니다. F.I.S.S.I.O.N.은 기존 콘텐츠를 자동으로 불러오고 향상된 모딩 기능을 적용합니다.
+
+### 플랫폼별 안내
 
 #### Windows
 
-```
-# Example: Installing into a Steam Fallout 2 installation
-# 1\. Navigate to your Fallout 2 folder (typically):
+```bat
+# 예: Steam Fallout 2 설치 폴더에 설치
+# 1. Fallout 2 폴더로 이동합니다. 일반적인 경로는 다음과 같습니다.
 cd "C:\Program Files (x86)\Steam\steamapps\common\Fallout 2"
-# 2\. Extract F.I.S.S.I.O.N. files here
-# 3\. Run fallout-fission.exe
+# 2. 이 위치에 F.I.S.S.I.O.N. 파일을 압축 해제합니다.
+# 3. fallout-fission.exe를 실행합니다.
 ```
 
 #### macOS
 
-```
-# Example: Using a GOG Fallout 2 installation
-# 1. Right-click Fallout2.app → "Show Package Contents"
-# 2. Navigate to Contents/Resources/Data/
-# 3. Extract F.I.S.S.I.O.N. files here
-# 4. Run fallout-fission.app
+```sh
+# 예: GOG Fallout 2 설치본 사용
+# 1. Fallout2.app을 우클릭한 뒤 "패키지 내용 보기"를 선택합니다.
+# 2. Contents/Resources/Data/로 이동합니다.
+# 3. 이 위치에 F.I.S.S.I.O.N. 파일을 압축 해제합니다.
+# 4. fallout-fission.app을 실행합니다.
 ```
 
 #### Linux
 
-```
-# Example: Using a Wine Fallout 2 installation
-# 1. Navigate to your Fallout 2 Wine prefix
+```sh
+# 예: Wine으로 설치한 Fallout 2 사용
+# 1. Fallout 2 Wine prefix로 이동합니다.
 cd ~/.wine/drive_c/Program\ Files/Fallout\ 2/
-# 2. Extract F.I.S.S.I.O.N. files
-# 3. Run with: wine fallout-fission.exe
+# 2. F.I.S.S.I.O.N. 파일을 압축 해제합니다.
+# 3. 다음 명령으로 실행합니다: wine fallout-fission.exe
 ```
 
-### Expected Folder Structure
+### 예상 폴더 구조
 
-After installation, your Fallout 2 folder should contain:
+설치 후 Fallout 2 폴더는 다음과 비슷한 구조가 됩니다.
 
-```
+```text
 Fallout 2/
-├── fallout-fission.exe     # F.I.S.S.I.O.N. executable (Windows)
-├── fallout-fission.app     # F.I.S.S.I.O.N. application (macOS)
-├── fission.dat            # Engine data file
-├── master.dat            # Original game data
-├── critter.dat           # Original game data
-├── patch000.dat          # Patch data (if present)
-├── data/                 # Game data folder
-│   ├── proto/           # Proto files (vanilla + mods)
-│   ├── text/            # Text files (vanilla + mods)
-│   └── maps/            # Map files
-└── data/lists/          # Auto-generated mod reports (created on first run)
+├── fallout-fission.exe     # F.I.S.S.I.O.N. 실행 파일 (Windows)
+├── fallout-fission.app     # F.I.S.S.I.O.N. 애플리케이션 (macOS)
+├── fission.dat             # 엔진 데이터 파일
+├── master.dat              # 원본 게임 데이터
+├── critter.dat             # 원본 게임 데이터
+├── patch000.dat            # 패치 데이터 (있는 경우)
+├── data/                   # 게임 데이터 폴더
+│   ├── proto/              # Proto 파일 (바닐라 + 모드)
+│   ├── text/               # 텍스트 파일 (바닐라 + 모드)
+│   └── maps/               # 맵 파일
+└── data/lists/             # 자동 생성되는 모드 리포트 (최초 실행 시 생성)
 ```
 
-### Important Notes
+### 중요 참고 사항
 
--   F.I.S.S.I.O.N. does NOT include game data - you must own Fallout 2
-
--   Your existing saves should work - F.I.S.S.I.O.N. maintains full compatibility
-
--   Mods stay where they are - F.I.S.S.I.O.N. reads from existing `data/` structure
-
--   No configuration needed for basic use - just replace the executable
+- F.I.S.S.I.O.N.에는 **게임 데이터가 포함되어 있지 않습니다**. Fallout 2를 직접 보유하고 있어야 합니다.
+- **기존 저장 파일은 그대로 사용할 수 있어야 합니다**. F.I.S.S.I.O.N.은 높은 호환성을 유지합니다.
+- **모드는 기존 위치에 그대로 두면 됩니다**. F.I.S.S.I.O.N.은 기존 `data/` 구조에서 데이터를 읽습니다.
+- 기본 사용에는 **별도 설정이 필요하지 않습니다**. 실행 파일만 교체하면 바로 작동합니다.
 
 ---
 
-## Configuration
+## 설정
 
-Use the in-game 'preferences' screen for 'graphics' configuration.
+그래픽 설정은 게임 내 `preferences` 화면에서 변경할 수 있습니다.
 
-Other configuration can be done fia the fission.cfg file.
+그 외 설정은 `fission.cfg` 파일에서 변경할 수 있습니다.
 
-For advanced tweaks, use the [enhancements] sections in 'fission.cfg':
+고급 조정을 하려면 `fission.cfg`의 `[enhancements]` 섹션을 사용하세요.
 
-```
+```ini
 [enhancements]
 WorldMapTravelMarkers=1
 GaplessMusic=1
 EnhancedBarter=1
 Minimap=1
 ```
-For a vanilla Fallout2.exe experiecne (at widescreen) set StrictVanilla=1
+
+와이드스크린만 적용하고 원본 `Fallout2.exe`와 최대한 같은 바닐라 경험을 원한다면 `StrictVanilla=1`로 설정하세요.
 
 ---
 
-## Contributing
+## 기여
 
-Contributions are welcome! Please open issues or pull requests on GitHub.
-For localization contributions, see the readme here: [Localization](https://github.com/cambragol/fission-ce/tree/main/files/localization)
-
----
-
-## Credits
-
-Thanks to Alex Batalov for all the initial work decompiling Fallout2.exe - without which FISSION does not exist
+기여는 언제든 환영합니다. GitHub에서 이슈를 열거나 풀 리퀘스트를 보내 주세요.
+현지화 기여에 관한 내용은 [Localization](https://github.com/cambragol/fission-ce/tree/main/files/localization) 문서를 참고하세요.
 
 ---
 
-## License
+## 크레딧
 
-Released under the [Sustainable Use License](LICENSE.md).
+Fallout2.exe를 디컴파일하는 초기 작업을 해 준 Alex Batalov에게 감사드립니다. 그의 작업이 없었다면 FISSION은 존재할 수 없었습니다.
+
+---
+
+## 라이선스
+
+[Sustainable Use License](LICENSE.md)에 따라 배포됩니다.
