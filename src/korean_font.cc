@@ -14,6 +14,7 @@
 
 #include "color.h"
 #include "db.h"
+#include "legacy_gdi_font.h"
 #include "platform_compat.h"
 #include "settings.h"
 #include "text_font.h"
@@ -469,6 +470,11 @@ static int koreanFontGetBufferSize(const char* string) {
 }
 
 void koreanFontSetCurrent(int font) {
+    if (legacyGdiFontsEnabled()) {
+        legacyGdiFontSetCurrent(font);
+        return;
+    }
+
     fontDrawText = koreanFontDrawText;
     fontGetLineHeight = koreanFontGetLineHeight;
     fontGetStringWidth = koreanFontGetStringWidth;
@@ -480,6 +486,10 @@ void koreanFontSetCurrent(int font) {
 }
 
 bool koreanFontsEnabled() {
+    if (legacyGdiFontsEnabled()) {
+        return true;
+    }
+
     if (fallbackFontName().empty()) {
         return false;
     }
@@ -505,6 +515,7 @@ int koreanFontGetByteCount(const char* string) {
 }
 
 void koreanFontsExit() {
+    legacyGdiFontsExit();
     gLoadedFonts.clear();
     gGlyphCache.clear();
 }

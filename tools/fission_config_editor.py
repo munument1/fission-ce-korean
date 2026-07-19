@@ -35,6 +35,7 @@ LINE_HEIGHT_KEYS = [
 KOREAN_PRESET = {
     "system.language": "korean",
     "font.ttf_renderer": "1",
+    "font.gdi_renderer": "-1",
     "font.legacy_codepage": "949",
     "font.font_path": "fonts/korean",
     "font.fallback_font_path": "data/fonts/korean",
@@ -61,9 +62,30 @@ KOREAN_PRESET = {
     "font.antialiased": "1",
 }
 
+KOREAN_GDI_PRESET = {
+    **KOREAN_PRESET,
+    "font.ttf_renderer": "0",
+    "font.gdi_renderer": "1",
+    "font.legacy_codepage": "949",
+    "font.gdi_text_face": "Dotum",
+    "font.gdi_text_size": "11",
+    "font.gdi_text_weight": "400",
+    "font.gdi_text_line_height": "11",
+    "font.gdi_button_face": "NanumBarunGothic",
+    "font.gdi_button_size": "15",
+    "font.gdi_button_weight": "400",
+    "font.gdi_button_line_height": "17",
+    "font.gdi_title_face": "NanumBarunGothic",
+    "font.gdi_title_size": "18",
+    "font.gdi_title_weight": "400",
+    "font.gdi_title_line_height": "20",
+    "font.gdi_binary_threshold": "128",
+}
+
 DEFAULTS = {
     "system.language": "english",
     "font.ttf_renderer": "0",
+    "font.gdi_renderer": "0",
     "font.legacy_codepage": "0",
     "font.font_path": "fonts/english",
     "font.fallback_font_path": "data/fonts/english",
@@ -88,6 +110,19 @@ DEFAULTS = {
     "font.width_scale": "1.000000",
     "font.baseline_offset": "0",
     "font.antialiased": "1",
+    "font.gdi_text_face": "Dotum",
+    "font.gdi_text_size": "11",
+    "font.gdi_text_weight": "400",
+    "font.gdi_text_line_height": "11",
+    "font.gdi_button_face": "NanumBarunGothic",
+    "font.gdi_button_size": "15",
+    "font.gdi_button_weight": "400",
+    "font.gdi_button_line_height": "17",
+    "font.gdi_title_face": "NanumBarunGothic",
+    "font.gdi_title_size": "18",
+    "font.gdi_title_weight": "400",
+    "font.gdi_title_line_height": "20",
+    "font.gdi_binary_threshold": "128",
 }
 
 CODEPAGE_PRESETS = {
@@ -103,9 +138,11 @@ CODEPAGE_PRESETS = {
 }
 
 RENDERER_VALUES = {
-    "Disabled (use .fon)": "0",
-    "Enabled (use TTF)": "1",
-    "Auto": "-1",
+    "Auto (Korean uses GDI)": ("0", "0"),
+    "Disabled (use .fon/.aaf)": ("0", "-1"),
+    "Legacy GDI (Windows)": ("0", "1"),
+    "Enabled (use TTF)": ("1", "-1"),
+    "TTF Auto": ("-1", "-1"),
 }
 
 
@@ -165,24 +202,28 @@ class ConfigEditor(tk.Tk):
         basic = ttk.Frame(notebook, padding=12)
         fonts = ttk.Frame(notebook, padding=12)
         layout = ttk.Frame(notebook, padding=12)
+        gdi = ttk.Frame(notebook, padding=12)
         notebook.add(basic, text="Basic")
         notebook.add(fonts, text="Fonts")
         notebook.add(layout, text="Layout")
+        notebook.add(gdi, text="Legacy GDI")
 
         self._build_basic_tab(basic)
         self._build_fonts_tab(fonts)
         self._build_layout_tab(layout)
+        self._build_gdi_tab(gdi)
 
         button_row = ttk.Frame(root)
         button_row.pack(fill=tk.X)
-        ttk.Button(button_row, text="Korean preset", command=self.apply_korean_preset).pack(side=tk.LEFT)
-        ttk.Button(button_row, text="Disable TTF", command=self.disable_ttf).pack(side=tk.LEFT, padx=8)
+        ttk.Button(button_row, text="Korean GDI preset", command=self.apply_korean_gdi_preset).pack(side=tk.LEFT)
+        ttk.Button(button_row, text="Korean TTF preset", command=self.apply_korean_preset).pack(side=tk.LEFT, padx=8)
+        ttk.Button(button_row, text="Disable custom fonts", command=self.disable_custom_fonts).pack(side=tk.LEFT, padx=8)
         ttk.Button(button_row, text="Save", command=self.save_config).pack(side=tk.RIGHT)
 
     def _build_basic_tab(self, parent):
         self._add_entry(parent, "Language", self.vars["system.language"], 0)
 
-        ttk.Label(parent, text="TTF renderer").grid(row=1, column=0, sticky=tk.W, pady=6)
+        ttk.Label(parent, text="Font renderer").grid(row=1, column=0, sticky=tk.W, pady=6)
         renderer = ttk.Combobox(parent, textvariable=self.renderer_choice, state="readonly")
         renderer["values"] = list(RENDERER_VALUES.keys())
         renderer.grid(row=1, column=1, sticky=tk.EW, pady=6)
@@ -199,8 +240,8 @@ class ConfigEditor(tk.Tk):
         self._add_folder_entry(parent, "Fallback font path", self.vars["font.fallback_font_path"], 5)
 
         note = (
-            "Use Enabled for translation packages that provide TTF fonts. "
-            "Use Disabled to keep the original .fon font behavior."
+            "Legacy GDI reproduces the crisp Windows font path used by the old Korean patch. "
+            "TTF remains available for cross-platform packages."
         )
         ttk.Label(parent, text=note, wraplength=560, foreground="#555").grid(
             row=6, column=0, columnspan=3, sticky=tk.W, pady=(16, 0)
@@ -233,6 +274,34 @@ class ConfigEditor(tk.Tk):
             onvalue="1",
             offvalue="0",
         ).grid(row=10, column=1, sticky=tk.W, pady=6)
+
+    def _build_gdi_tab(self, parent):
+        fields = [
+            ("Text face", "gdi_text_face"),
+            ("Text size", "gdi_text_size"),
+            ("Text weight", "gdi_text_weight"),
+            ("Text line height", "gdi_text_line_height"),
+            ("Button face", "gdi_button_face"),
+            ("Button size", "gdi_button_size"),
+            ("Button weight", "gdi_button_weight"),
+            ("Button line height", "gdi_button_line_height"),
+            ("Title face", "gdi_title_face"),
+            ("Title size", "gdi_title_size"),
+            ("Title weight", "gdi_title_weight"),
+            ("Title line height", "gdi_title_line_height"),
+            ("Binary threshold", "gdi_binary_threshold"),
+        ]
+        for row, (label, key) in enumerate(fields):
+            self._add_entry(parent, label, self.vars[f"font.{key}"], row)
+
+        note = (
+            "Threshold 1 matches the old DLL: every non-black GDI pixel becomes a solid Fallout palette pixel. "
+            "Raise it if strokes look too heavy."
+        )
+        ttk.Label(parent, text=note, wraplength=560, foreground="#555").grid(
+            row=len(fields), column=0, columnspan=3, sticky=tk.W, pady=(16, 0)
+        )
+        parent.columnconfigure(1, weight=1)
 
     def _add_entry(self, parent, label, variable, row):
         ttk.Label(parent, text=label).grid(row=row, column=0, sticky=tk.W, pady=6)
@@ -361,14 +430,22 @@ class ConfigEditor(tk.Tk):
             self.vars[dotted_key].set(value)
         self._sync_choices()
 
-    def disable_ttf(self):
+    def apply_korean_gdi_preset(self):
+        for dotted_key, value in KOREAN_GDI_PRESET.items():
+            self.vars[dotted_key].set(value)
+        self._sync_choices()
+
+    def disable_custom_fonts(self):
         self.vars["font.ttf_renderer"].set("0")
+        self.vars["font.gdi_renderer"].set("-1")
         self.vars["font.legacy_codepage"].set("0")
         self._sync_choices()
 
     def _renderer_selected(self, _event=None):
         label = self.renderer_choice.get()
-        self.vars["font.ttf_renderer"].set(RENDERER_VALUES.get(label, "0"))
+        ttf_value, gdi_value = RENDERER_VALUES.get(label, ("0", "0"))
+        self.vars["font.ttf_renderer"].set(ttf_value)
+        self.vars["font.gdi_renderer"].set(gdi_value)
 
     def _codepage_selected(self, _event=None):
         label = self.codepage_choice.get()
@@ -377,13 +454,16 @@ class ConfigEditor(tk.Tk):
             self.vars["font.legacy_codepage"].set(value)
 
     def _sync_choices(self):
-        renderer_value = self.vars["font.ttf_renderer"].get()
+        renderer_value = (
+            self.vars["font.ttf_renderer"].get(),
+            self.vars["font.gdi_renderer"].get(),
+        )
         for label, value in RENDERER_VALUES.items():
             if value == renderer_value:
                 self.renderer_choice.set(label)
                 break
         else:
-            self.renderer_choice.set("Disabled (use .fon)")
+            self.renderer_choice.set("Auto (Korean uses GDI)")
 
         codepage_value = self.vars["font.legacy_codepage"].get()
         for label, value in CODEPAGE_PRESETS.items():
@@ -395,7 +475,22 @@ class ConfigEditor(tk.Tk):
 
     def _validate(self):
         int_keys = [key for key, _ in SIZE_KEYS + LINE_HEIGHT_KEYS]
-        int_keys.extend(["legacy_codepage", "baseline_offset", "ttf_renderer"])
+        int_keys.extend([
+            "legacy_codepage",
+            "baseline_offset",
+            "ttf_renderer",
+            "gdi_renderer",
+            "gdi_text_size",
+            "gdi_text_weight",
+            "gdi_text_line_height",
+            "gdi_button_size",
+            "gdi_button_weight",
+            "gdi_button_line_height",
+            "gdi_title_size",
+            "gdi_title_weight",
+            "gdi_title_line_height",
+            "gdi_binary_threshold",
+        ])
         for key in int_keys:
             value = self.vars[f"font.{key}"].get().strip()
             try:
@@ -420,6 +515,12 @@ class ConfigEditor(tk.Tk):
             default = self.vars["font.default_font"].get().strip()
             if not normal and not default:
                 messagebox.showerror("Missing font", "Set at least normal_font or default_font when TTF renderer is enabled.")
+                return False
+
+        if self.vars["font.gdi_renderer"].get().strip() == "1":
+            threshold = int(self.vars["font.gdi_binary_threshold"].get().strip())
+            if threshold < 1 or threshold > 255:
+                messagebox.showerror("Invalid value", "gdi_binary_threshold must be between 1 and 255.")
                 return False
 
         return True

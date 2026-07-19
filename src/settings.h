@@ -131,6 +131,9 @@ struct EnhancementSettings {
 struct FontSettings {
     // -1 = auto, 0 = disabled, 1 = enabled.
     int ttf_renderer = 0;
+    // -1 = disabled, 0 = automatic for Korean on Windows, 1 = enabled.
+    // Modelled after the legacy Korean fallout2font.dll.
+    int gdi_renderer = 0;
     int legacy_codepage = 0;
     std::string font_path = "fonts/english";
     std::string fallback_font_path = "data/fonts/english";
@@ -155,6 +158,19 @@ struct FontSettings {
     double width_scale = 1.0;
     int baseline_offset = 0;
     bool antialiased = true;
+    std::string gdi_text_face = "Dotum";
+    int gdi_text_size = 11;
+    int gdi_text_weight = 400;
+    int gdi_text_line_height = 11;
+    std::string gdi_button_face = "NanumBarunGothic";
+    int gdi_button_size = 15;
+    int gdi_button_weight = 400;
+    int gdi_button_line_height = 17;
+    std::string gdi_title_face = "NanumBarunGothic";
+    int gdi_title_size = 18;
+    int gdi_title_weight = 400;
+    int gdi_title_line_height = 20;
+    int gdi_binary_threshold = 128;
 };
 
 struct ModSettings {

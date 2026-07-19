@@ -38,6 +38,10 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+if(NOT DATE)
+    set(DATE "\"unknown\"")
+endif()
+
 # Define a variable for CI_BUILD
 set(CI_BUILD 0)
 

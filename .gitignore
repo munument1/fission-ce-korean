@@ -395,6 +395,9 @@ FodyWeavers.xsd
 # CMake
 /out
 /build
+/third_party_fonts
+/test_install_fission.cfg
+*.bak
 
 # versioning header
 src/platform/git_version.h

@@ -153,6 +153,7 @@ static void settingsFromConfig()
     settingsRead(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_NPC_ARMOR, settings.enhancements.npc_armor);
 
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TTF_RENDERER_KEY, settings.font.ttf_renderer);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_RENDERER_KEY, settings.font.gdi_renderer);
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LEGACY_CODEPAGE_KEY, settings.font.legacy_codepage);
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FONT_PATH_KEY, settings.font.font_path);
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FALLBACK_FONT_PATH_KEY, settings.font.fallback_font_path);
@@ -177,6 +178,19 @@ static void settingsFromConfig()
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_WIDTH_SCALE_KEY, settings.font.width_scale);
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BASELINE_OFFSET_KEY, settings.font.baseline_offset);
     settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_ANTIALIASED_KEY, settings.font.antialiased);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_FACE_KEY, settings.font.gdi_text_face);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_SIZE_KEY, settings.font.gdi_text_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_WEIGHT_KEY, settings.font.gdi_text_weight);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_LINE_HEIGHT_KEY, settings.font.gdi_text_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_FACE_KEY, settings.font.gdi_button_face);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_SIZE_KEY, settings.font.gdi_button_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_WEIGHT_KEY, settings.font.gdi_button_weight);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_LINE_HEIGHT_KEY, settings.font.gdi_button_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_FACE_KEY, settings.font.gdi_title_face);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_SIZE_KEY, settings.font.gdi_title_size);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_WEIGHT_KEY, settings.font.gdi_title_weight);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_LINE_HEIGHT_KEY, settings.font.gdi_title_line_height);
+    settingsRead(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BINARY_THRESHOLD_KEY, settings.font.gdi_binary_threshold);
 }
 
 // read in modConfig setting (no writing back, just reading)
@@ -369,6 +383,7 @@ static void settingsToConfig()
     settingsWrite(GAME_CONFIG_ENHANCEMENTS_KEY, GAME_CONFIG_NPC_ARMOR, settings.enhancements.npc_armor);
 
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_TTF_RENDERER_KEY, settings.font.ttf_renderer);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_RENDERER_KEY, settings.font.gdi_renderer);
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_LEGACY_CODEPAGE_KEY, settings.font.legacy_codepage);
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FONT_PATH_KEY, settings.font.font_path);
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_FALLBACK_FONT_PATH_KEY, settings.font.fallback_font_path);
@@ -393,6 +408,19 @@ static void settingsToConfig()
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_WIDTH_SCALE_KEY, settings.font.width_scale);
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_BASELINE_OFFSET_KEY, settings.font.baseline_offset);
     settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_ANTIALIASED_KEY, settings.font.antialiased);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_FACE_KEY, settings.font.gdi_text_face);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_SIZE_KEY, settings.font.gdi_text_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_WEIGHT_KEY, settings.font.gdi_text_weight);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TEXT_LINE_HEIGHT_KEY, settings.font.gdi_text_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_FACE_KEY, settings.font.gdi_button_face);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_SIZE_KEY, settings.font.gdi_button_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_WEIGHT_KEY, settings.font.gdi_button_weight);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BUTTON_LINE_HEIGHT_KEY, settings.font.gdi_button_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_FACE_KEY, settings.font.gdi_title_face);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_SIZE_KEY, settings.font.gdi_title_size);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_WEIGHT_KEY, settings.font.gdi_title_weight);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_TITLE_LINE_HEIGHT_KEY, settings.font.gdi_title_line_height);
+    settingsWrite(GAME_CONFIG_FONT_KEY, GAME_CONFIG_GDI_BINARY_THRESHOLD_KEY, settings.font.gdi_binary_threshold);
 
     // Mod Settings
     /*settingsWrite(MOD_CONFIG_SETTINGS_KEY, MOD_CONFIG_DUDE_NATIVE_LOOK_JUMPSUIT_MALE_KEY, settings.mod_settings.dude_native_look_jumpsuit_male);

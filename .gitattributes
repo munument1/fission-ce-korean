@@ -21,5 +21,8 @@ gradlew text eol=lf
 CMakeLists.txt text eol=lf
 LICENSE text eol=lf
 
+# Fallout list files can use engine-specific line endings; preserve exact bytes.
+*.lst -text
+
 # Force CRLF
 *.bat text eol=crlf
